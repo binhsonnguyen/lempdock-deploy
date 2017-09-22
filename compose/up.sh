@@ -5,8 +5,10 @@ REPO=$1
 git ls-remote "$REPO" &>-
 if [ "$?" -ne 0 ]; then
     echo "[FATAL] Unable to read from '$REPO'"
+    rm -
     exit 1;
 fi
+rm -
 
 docker-compose down
 if [ "$?" -ne 0 ]; then
