@@ -1,0 +1,1 @@
+FROM codegym/php7-fpm

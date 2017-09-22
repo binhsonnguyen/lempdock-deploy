@@ -1,0 +1,32 @@
+version: '2'
+services:
+  cgi:
+    build:
+      context: ./
+      dockerfile: cgi.dockerfile
+    working_dir: /var/www
+    volumes:
+      - ./laravel/:/var/www
+    environment:
+      - "DB_PORT=3306"
+      - "DB_HOST=db"
+
+  web:
+    build:
+      context: ./
+      dockerfile: web.dockerfile
+    working_dir: /var/www
+    volumes_from:
+      - cgi
+    ports:
+      - $WEB_PORT:80
+
+  db:
+    image: mysql:5
+    environment:
+      - "MYSQL_DATABASE=homestead"
+      - "MYSQL_USER=homestead"
+      - "MYSQL_PASSWORD=secret"
+      - "MYSQL_ROOT_PASSWORD=secret"
+    ports:
+        - $DB_PORT:3306
