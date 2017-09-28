@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 REPO=$1
+BRANCH=$2
 
 git ls-remote "$REPO" &>-
 if [ "$?" -ne 0 ]; then
@@ -28,7 +29,7 @@ if [ "$?" -ne 0 ]; then
     exit 1;
 fi
 
-if [ -z "$2" ]; then
+if [ -z "$BRANCH" ]; then
     echo "[INFO] no any branch gave, using master."
 else
     BRANCH=$2

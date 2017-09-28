@@ -81,6 +81,7 @@ mkdir ${PORT}
 if [ $? -ne 0 ]; then
     echo "[ERROR] can not create directory $PORT, exiting"
     ./down.sh ${PORT}
+    exit 1
 fi
 echo "$PORT"
 
@@ -109,6 +110,7 @@ sudo firewall-cmd --permanent --add-port=${PORT}/tcp
 if [ $? -ne 0 ]; then
     echo "[ERROR] can not open port $PORT, exiting"
     ./down.sh ${PORT}
+    exit 1
 fi
 
 echo "[INFO] openning port ${DB_PORT}"
@@ -116,6 +118,7 @@ sudo firewall-cmd --permanent --add-port=${DB_PORT}/tcp
 if [ $? -ne 0 ]; then
     echo "[ERROR] can not open port $DB_PORT, exiting"
     ./down.sh ${PORT}
+    exit 1
 fi
 
 echo "[INFO] reloading firewalld"
@@ -123,11 +126,10 @@ sudo firewall-cmd --reload
 if [ $? -ne 0 ]; then
     echo "[ERROR] can not reload firewalld, exiting"
     ./down.sh ${PORT}
+    exit 1;
 fi
 
-
-BRANCH=$2
-if [ -z "$2" ]; then
+if [ -z "$BRANCH" ]; then
     BRANCH="master"
 fi
 
