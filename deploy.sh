@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+git pull
+if [ "$?" -ne 0 ]; then
+    echo "[FATAL] Could not self-update, exiting"
+    exit 1;
+fi
+
 REPO=$1
 git ls-remote "$REPO" &>-
 if [ "$?" -ne 0 ]; then
