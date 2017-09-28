@@ -28,6 +28,19 @@ if [ "$?" -ne 0 ]; then
     exit 1;
 fi
 
+if [ -z "$2" ]; then
+    echo "[INFO] no any branch gave, using master."
+else
+    BRANCH=$2
+    cd laravel
+    git checkout ${BRANCH}
+    if [ "$?" -ne 0 ]; then
+        echo "[FATAL] Unable to checkout given branch: '$BRANCH', exiting"
+        exit 1;
+    fi
+    cd ..
+fi
+
 cp -f ./.env.example ./laravel/.env
 
 rm -f ./laravel/*.lock

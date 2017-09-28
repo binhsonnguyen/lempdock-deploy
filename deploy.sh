@@ -125,7 +125,13 @@ if [ $? -ne 0 ]; then
     ./down.sh ${PORT}
 fi
 
-./up.sh ${REPO}
+
+BRANCH=$2
+if [ -z "$2" ]; then
+    BRANCH="master"
+fi
+
+./up.sh ${REPO} ${BRANCH}
 if [ "$?" -ne 0 ]; then
     echo "[FUCK]"
     cd -
