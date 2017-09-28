@@ -18,6 +18,7 @@ if [[ "$(docker images -q codegym/php7-fpm 2> /dev/null)" == "" ]]; then
         exit 1;
     fi
     echo "[INFO] php7-fpm build successfully"
+    cd ..
 fi
 
 LOWER_PORT=4000
