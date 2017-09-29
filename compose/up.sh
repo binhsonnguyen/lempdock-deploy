@@ -3,6 +3,8 @@
 REPO=$1
 BRANCH=$2
 
+echo "[FATAL]Clonning $REPO:$BRANCH"
+
 git ls-remote "$REPO" &>-
 if [ "$?" -ne 0 ]; then
     echo "[FATAL] Unable to read from '$REPO'"

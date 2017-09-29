@@ -6,7 +6,7 @@ BRANCH=$2
 
 git pull
 if [ "$?" -ne 0 ]; then
-    echo "[FATAL] Could not self-update, exiting"
+    echo "[FATAL] Could not self-updating, exiting"
     exit 1;
 fi
 
