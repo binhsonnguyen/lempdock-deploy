@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 
+REPO=$1
+
+BRANCH=$2
+
 git pull
 if [ "$?" -ne 0 ]; then
     echo "[FATAL] Could not self-update, exiting"
     exit 1;
 fi
 
-REPO=$1
 git ls-remote "$REPO" &>-
 if [ "$?" -ne 0 ]; then
     echo "[ERROR] Unable to read from '$REPO'"
